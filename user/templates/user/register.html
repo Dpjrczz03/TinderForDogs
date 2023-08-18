@@ -1,0 +1,27 @@
+{% extends 'dog/base.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block content %}
+
+<div class="container-fluid">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <br>
+                <br>
+                <legend class="border-bottom mb-4 m-2">JOIN TODAY</legend>
+                {{ form1|crispy}}
+                {{ form2|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger mb-4" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+</div>
+
+{% endblock content %}

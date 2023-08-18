@@ -1,0 +1,36 @@
+{% extends "dog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container-fluid">
+      <div class="media">
+          <br>
+        <img class="rounded-circle account-img overflow-hidden m-3" src="{{ user.profile.image.url }}" width=250px height=250px>
+        <div class="media-body">
+          <h2 class="account-heading">
+              {% if user.profile.gender == 'M' %}
+                {{ user.get_short_name }}&nbsp;♂
+              {% elif user.profile.gender == 'F'%}
+                {{ user.get_short_name }}&nbsp;♀
+              {% elif user.profile.gender == 'R'%}
+                {{ user.get_short_name }}&nbsp;⚥
+              {% endif %}
+          </h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+    <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <br>
+
+                <legend class="border-bottom mb-4 m-2">PROFILE INFO</legend>
+                {{ u_form|crispy}}
+                {{ p_form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <br>
+                <button class="btn btn-outline-danger mb-4" type="submit">Update</button>
+            </div>
+    </form>
+    </div>
+{% endblock content %}
